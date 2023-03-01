@@ -18,6 +18,7 @@ import Products from "./pages/admin/Products";
 import Orders from "./pages/admin/Orders";
 import Statistics from "./pages/admin/Statistics";
 import EshopCategory from "./pages/eshopCategory/EshopCategory";
+import SearchResult from "./pages/searchResult/SearchResult";
 function App() {
   const Salesdata = useSelector(salesdata)
   const [UserData, setUserData ] = useState({
@@ -45,7 +46,7 @@ function App() {
           <Route path='products/:id' element={<ProductDisplay/>}/>
           <Route path="cart" element={<EshopCart />} />
           <Route path=":category" element={<EshopCategory />} />
-          <Route path="results" element={<EshopCategory />} />
+          <Route path="results" element={<SearchResult />} />
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<Dashboard data={UserData} />} />
