@@ -45,6 +45,7 @@ function App() {
           <Route path='products/:id' element={<ProductDisplay/>}/>
           <Route path="cart" element={<EshopCart />} />
           <Route path=":category" element={<EshopCategory />} />
+          <Route path="results" element={<EshopCategory />} />
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<Dashboard data={UserData} />} />

@@ -14,6 +14,10 @@ const Header = () => {
   const adminUsers = ["adedayoke2006@gmail.com", "okeibraheem267@gmail.com"]
   
   const [View, setView] = useState(true);
+
+  const norun = (val)=>{
+
+  }
   return (
     <div className='header'>
       <img width="100px" className='header__logo' src={logo} alt="" />
