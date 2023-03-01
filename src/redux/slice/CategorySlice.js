@@ -4,7 +4,8 @@ const initialState = {
     computing : [],
     fashion : [],
     catstate : true,
-    currentlyRendered: null
+    currentlyRendered: null,
+    searchResults: null
 }
 const CategorySlice = createSlice({
     name: "categories",
@@ -25,13 +26,17 @@ const CategorySlice = createSlice({
         RENDER(state, action){
             state.currentlyRendered = action.payload
         },
+        RENDER_SEARCH_RESULT(state, action){
+            state.searchResults = action.payload
+        },
     }
 })
-export const {PHONES_AND_TABLETS, COMPUTING, FASHION, CAT_STATE, RENDER} = CategorySlice.actions
+export const {PHONES_AND_TABLETS, COMPUTING, FASHION, CAT_STATE, RENDER, RENDER_SEARCH_RESULT} = CategorySlice.actions
 export const phoneandtablet = (state)=>state.categories.phoneandtablet
 export const computing = (state)=>state.categories.computing
 export const fashion = (state)=>state.categories.fashion
 export const catstate = (state)=>state.categories.catstate
 export const currentlyRendered = (state)=>state.categories.currentlyRendered
+export const searchResults = (state)=>state.categories.searchResults
 
 export default CategorySlice.reducer

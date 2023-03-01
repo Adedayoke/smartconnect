@@ -880,6 +880,20 @@ html{
         padding: 1rem;
       }
     }
+    &searchResult{
+      min-height: 100vh;
+      display: flex;
+      justify-content: end;
+      & .innerLayer{
+        background-color: white;
+        box-shadow: var(--box-shadow);
+        width: 70%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 1rem;
+      }
+    }
     @media (max-width: 900px){
       & .store{
         &MainCont{

@@ -15,6 +15,7 @@ const ShopNav = () => {
   const [sneakCartDisplay, setSneakCartDisplay] = useState(true)
   const ref = useRef()
   const [cartIconColor, setCartIconColor] = useState("black")
+  const [search_query, setSearch_query] = useState("") 
   const dispatch = useDispatch()
   useEffect(()=>{
     if(window.innerWidth > 709){
@@ -42,8 +43,8 @@ const ShopNav = () => {
       <GiHamburgerMenu onClick={handleHam} size={20} />
       </div>
         <div className="storeMainContNav__searchCont">
-        <input placeholder='Search Products and categories' type="text"  />
-        <Button>Search</Button>
+        <input onChange={(e)=>setSearch_query(e.target.value)} value={search_query} placeholder='Search Products and categories' type="text"  />
+        <Link to={`/results?search_query=${search_query?.replace(" ", "+")}`}><Button>Search</Button></Link>
         </div>
         <div ref={ref} className="storeMainContNav__cart">
           <Link to="cart">
