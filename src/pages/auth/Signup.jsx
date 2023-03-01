@@ -144,7 +144,7 @@ const Signup = () => {
         </div>
         <button>Register</button>
       </form>
-      <p className='p-already'>Already registered? <Link>Sign In</Link></p>
+      <p className='p-already'>Already registered? <Link to="/login">Login</Link></p>
       </div>
     </section>
     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from "../../assets/smartconnect.svg"
 import avatar from "../../assets/avatar.png"
 import Button from '../button/Button';
@@ -13,6 +13,7 @@ const Header = () => {
   const userEmail = useSelector(selectuserEmail)
   const adminUsers = ["adedayoke2006@gmail.com", "okeibraheem267@gmail.com"]
   
+  const [View, setView] = useState(true);
   return (
     <div className='header'>
       <img width="100px" className='header__logo' src={logo} alt="" />
@@ -24,13 +25,29 @@ const Header = () => {
         <li><Link to='/coupon-checker'>Coupon Checker</Link></li>
         <li><Link to='/raffle-winners'>Raffle</Link></li>
         <li><Link to='/coupon-merchants'>Smart Vendors</Link></li>
-        {/* {adminUsers.includes(userEmail) &&   */}
-        <li><Link to='/admin'>Admin</Link></li>
-        {/*  } */}
-        {
-          !isLoggedIn ? <Button><Link to='/signup'>Get Started</Link></Button>:
-          <div className='avatar'><img src={avatar} alt="" /></div>
+        {adminUsers.includes(userEmail) &&  
+          <li><Link to='/admin/dashboard'>Admin</Link></li>
         }
+        {
+          !isLoggedIn ? 
+          <Button><Link to='/signup'>Get Started</Link></Button>:
+          <div className='avatar'>
+            <img onClick={()=>setView(!View)} src={avatar} alt="" />
+            <div className={View ? "noView" : "view"}>
+              <ul className="acctInfo">
+                <Link onClick={()=>setView(true)} to="/account">
+                  <li>Account</li>
+                </Link>
+                <Link onClick={()=>setView(true)} to="/signup">
+                  <li>Register User</li>
+                </Link>
+                <Link onClick={()=>setView(true)}>
+                  <li>Log Out</li>
+                </Link>
+              </ul>
+            </div>
+          </div>
+        } 
       </ul>
       <div className="ham">
         <GiHamburgerMenu size={20} />
