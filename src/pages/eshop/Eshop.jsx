@@ -12,11 +12,10 @@ const Eshop = () => {
   const catstateSet = useSelector(catstate)
   return (
     <div className='eshop'>
-      
-        <Head>Shop</Head>
-        <ShopNav />
-        { catstateSet && <Category />}
-        <Outlet />
+      <Head>Shop</Head>
+      <ShopNav />
+      { catstateSet && <Category />}
+      <Outlet />
     </div>
   )
 }

@@ -17,6 +17,7 @@ import { useState } from "react";
 import Products from "./pages/admin/Products";
 import Orders from "./pages/admin/Orders";
 import Statistics from "./pages/admin/Statistics";
+import EshopCategory from "./pages/eshopCategory/EshopCategory";
 function App() {
   const Salesdata = useSelector(salesdata)
   const [UserData, setUserData ] = useState({
@@ -43,6 +44,7 @@ function App() {
           <Route path="" element={<MyStore />} />
           <Route path='products/:id' element={<ProductDisplay/>}/>
           <Route path="cart" element={<EshopCart />} />
+          <Route path=":category" element={<EshopCategory />} />
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="dashboard" element={<Dashboard data={UserData} />} />
