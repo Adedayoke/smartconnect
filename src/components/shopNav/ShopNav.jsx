@@ -37,18 +37,21 @@ const ShopNav = () => {
       dispatch(CAT_STATE(true))
     }
   }
-  const norun = (val)=>{
-
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    setSearch_query("")
   }
   return (
     <div className="storeMainContNav">
       <div className={catstateSet ? "navHam active" : "navHam"}>
       <GiHamburgerMenu onClick={handleHam} size={20} />
       </div>
-        <div className="storeMainContNav__searchCont">
-        <input onChange={(e)=>setSearch_query(e.target.value)} value={search_query} placeholder='Search Products and categories' type="text"  />
-        <Link to={search_query.trimStart() && `/store/results?search_query=${search_query?.trimStart().replace(" ", "+")}`}><button onClick={()=>setSearch_query("")} className='btn-primary'>Search</button></Link>
-        </div>
+        <form className="storeMainContNav__searchCont">
+          <input onChange={(e)=>setSearch_query(e.target.value)} value={search_query} placeholder='Search Products and categories' type="text"  />
+          <Link to={search_query.trimStart() && `/store/results?search_query=${search_query?.trimStart().replace(" ", "+")}`}>
+            <button onSubmit={handleSubmit} className='btn-primary'>Search</button>
+          </Link>
+        </form>
         <div ref={ref} className="storeMainContNav__cart">
           <Link to="cart">
              <FaShoppingCart color={cartIconColor} size={20} />

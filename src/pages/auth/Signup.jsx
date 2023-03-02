@@ -63,7 +63,8 @@ const Signup = () => {
                 userName: userName,
                 phone: phone,
                 couponcode: couponcode,
-                referrer: referral
+                referrer: referral,
+                cart: []
               });
               await setDoc(doc(db, "accountBalance", referral), {
                 balance: docSnap3.data().balance + 3000
@@ -78,7 +79,8 @@ const Signup = () => {
               name: `${firstname} ${lastName}`,
               userName: userName,
               phone: phone,
-              couponcode: couponcode
+              couponcode: couponcode,
+              cart: []
             });
           }
           await setDoc(doc(db, "accountBalance", response.user.uid), {balance: 0.00})
