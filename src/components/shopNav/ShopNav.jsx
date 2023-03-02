@@ -47,7 +47,7 @@ const ShopNav = () => {
       </div>
         <div className="storeMainContNav__searchCont">
         <input onChange={(e)=>setSearch_query(e.target.value)} value={search_query} placeholder='Search Products and categories' type="text"  />
-        <Link to={search_query.trimStart() && `/store/results?search_query=${search_query?.trimStart().replace(" ", "+")}`}><button className='btn-primary'>Search</button></Link>
+        <Link to={search_query.trimStart() && `/store/results?search_query=${search_query?.trimStart().replace(" ", "+")}`}><button onClick={()=>setSearch_query("")} className='btn-primary'>Search</button></Link>
         </div>
         <div ref={ref} className="storeMainContNav__cart">
           <Link to="cart">
