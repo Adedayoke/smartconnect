@@ -38,16 +38,18 @@ function App() {
       borderRadius: 10,
     }]
   })
-
-
+  const ID = UserId
+  console.log(ID)
   const SetNeccesaryData = async ()=>{
     if (UserId){
       const docRef = doc(db, "users", UserId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
         const userCart = docSnap.data().cart
-        dispatch(ADD_TO_CART(...userCart))
+        console.log(userCart)
+        if(userCart.length !== 0){
+          dispatch(ADD_TO_CART(...userCart))
+        }
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -56,7 +58,7 @@ function App() {
   }
   useEffect(()=>{
     SetNeccesaryData()
-  }, [UserId, CART])
+  }, [ID])
 
   return (
     <div className="App">

@@ -60,14 +60,14 @@ const ShopNav = () => {
         </div>
         <div className={sneakCartDisplay ? "sneakCartDisplay opacity_Zero": "sneakCartDisplay"}>
           <ul>
-            {CART.map((product)=>{
+            {CART?.map((product)=>{
               return(
                 <li>
                   <div className="imgCont">
-                    <img src={product.img} alt="" />
+                    <img src={product?.img} alt="" />
                   </div>
                   <div className="productDetail">
-                    <h3>{product.productName}</h3>
+                    <h3>{product?.productName}</h3>
                   </div>
                 </li>
               )

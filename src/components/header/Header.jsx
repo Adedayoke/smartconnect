@@ -20,7 +20,9 @@ const Header = () => {
   }
   return (
     <div className='header'>
+      <Link to="/">
       <img width="100px" className='header__logo' src={logo} alt="" />
+      </Link>
       <ul>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/store'>Smart Store</Link></li>
