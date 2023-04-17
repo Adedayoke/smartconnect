@@ -1,4 +1,11 @@
 export {default as Header} from "./header/Header";
 export {default as Footer} from "./footer/Footer";
 export {default as GridSection} from "./gridSection/GridSection";
-export {default as Button} from "./button/Button";
+export {default as AdminSide} from "./AdminSideBar/AdminSide";
+export {default as CardWrapper} from "./card/CardWrapper";
+export {default as Category} from "./category/Category";
+export {default as Fadedh1} from "./fadedh1/Fadedh1";
+export {default as Head} from "./head/Head";
+export {default as Header} from "./header/Header";
+export {default as Loader} from "./loader/Loader";
+export {default as ShopNav} from "./shopNav/ShopNav";
