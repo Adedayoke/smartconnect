@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 import { Footer, Header } from "./components";
-import { Blog, EshopCart, Home, Login, Signup, SmartVendors, ProductDisplay, Eshop, SearchResult, EshopCategory } from "./pages"; 
+import { Blog, EshopCart, Home, Login, Signup, SmartVendors, ProductDisplay, Eshop, SearchResult, EshopCategory, MyStore } from "./pages"; 
 import { NoCodeReg } from "./pages/auth";
 import { Admin, Dashboard, Orders, Products, Statistics } from "./pages/admin";
 

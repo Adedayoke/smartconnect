@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FaShoppingCart, FaTimes } from 'react-icons/fa'
-import Button from '../button/Button'
 import { useSelector, useDispatch } from 'react-redux'
 import { myCartNum } from '../../redux/slice/CartSlice'
 import { myCart } from '../../redux/slice/CartSlice'

@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { Header } from '../../components'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import logo from "../../assets/smartconnect.svg"
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../../firebase/firebase'
 import { useDispatch } from 'react-redux'
 import { SET_CURRENT_USER } from '../../redux/slice/AuthSlice'
-import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { ToastContainer, toast } from 'react-toastify';
-import { async } from '@firebase/util'
-
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { toast } from 'react-toastify';
+import {Loader} from '../../components'
 
 const Signup = () => {
-  // const referral = null
   const [searchParams, setSearchParams] = useSearchParams();
-  const referral = searchParams.get("ref");
+  const referral = searchParams?.get("ref");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -23,32 +20,40 @@ const Signup = () => {
   const [phone, setPhone] = useState("");
   const [couponcode, setcouponCode] = useState("");
   const [refName, setrefName] = useState(null);
+  const [isLoading, setisLoading] = useState(false);
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const checkRefName = async ()=>{
-    const docSnap4 = await getDoc(doc(db, "users", referral))
+    try {
+      const docSnap4 = await getDoc(doc(db, "users", referral))
       if(docSnap4.exists()){
         setrefName(docSnap4.data().userName)
       }
+    } catch (error) {
+      toast.error(`${error}`)
+    }
   }
   useEffect(()=>{
-    checkRefName()
-  })
+    if(referral){
+      checkRefName()
+    }
+  }, [referral])
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
-   
+    setisLoading(true)
     try {
       const docRef = doc(db, "couponcodes", "WLAwRtfCVXRu4LdUjPZ5");
       const docRef2 = doc(db, "Registeredcodes", "QjYAvLACV5D0GYPuskmQ");
       const docSnap = await getDoc(docRef);
       const docSnap2 = await getDoc(docRef2);
       // if (docSnap.exists()) {
-      const couponcodes = docSnap.data()
-      const registeredcodes = docSnap2.data()
+      const couponcodes = docSnap.data();
+      const registeredcodes = docSnap2.data();
       if (couponcodes.codes.includes(couponcode)){
         if (registeredcodes.codes.includes(couponcode)){
+          setisLoading(false)
           toast.error("Coupon code is already in use")
         }
         else{
@@ -71,6 +76,7 @@ const Signup = () => {
               })
             }
             else{
+              setisLoading(false)
               toast.error("Referrer does not exist")
             }
           }
@@ -87,11 +93,13 @@ const Signup = () => {
           await setDoc(doc(db, "Registeredcodes", "QjYAvLACV5D0GYPuskmQ"), {
             codes: [...registeredcodes.codes, couponcode]
           })
+          setisLoading(false)
           toast.success("User registered successfully")
           navigate("/")
         }
       }
       else{
+        setisLoading(false)
         toast.error("Invalid coupon code")
       }
         
@@ -102,10 +110,15 @@ const Signup = () => {
     
 
   } catch (err) {
-    
+    setisLoading(false)
+    toast.error(`${err}`)
   }
   }
   return (
+    <>
+    {
+      isLoading && <Loader />
+    }
     <div className='signUpCont'>
     <div className='logo'>
       <img width="200px" src={logo} alt="" />
@@ -150,6 +163,7 @@ const Signup = () => {
       </div>
     </section>
     </div>
+    </>
   )
 }
 

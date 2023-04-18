@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { DECREASE_QUANTITY, INCREASE_QUANTITY, myCart, REMOVE_FROM_CART } from '../../redux/slice/CartSlice'
-import img from '../../redux/Apple IPhone 13 Pro.PNG'
 import { FaTrash } from 'react-icons/fa'
-// import { SET_PRODUCT_STATE_false } from '../../redux/slice/AllProductsSlice'
-import { Button } from '../../components'
 import { db } from '../../firebase/firebase'
 import { selectuserId } from '../../redux/slice/AuthSlice'
 import { doc, updateDoc } from 'firebase/firestore'
+import { PopUp } from '../../components'
+import { Link } from 'react-router-dom'
 
 const EshopCart = () => {
     const CART = useSelector(myCart);
     const [cart, setcart] = useState([])
     const [subTotal, setsubTotal] = useState(0)
+    const [PopUpState, setPopUpState] = useState(false)
     const UserId = useSelector(selectuserId)
     const updateOnUser = async ()=>{
         const docRef = doc(db, "users", UserId);
@@ -53,7 +53,15 @@ const EshopCart = () => {
             }
         })
     }
+    const onCheckout = () =>{
+        if(UserId){
+
+        }else{
+            setPopUpState(true)
+        }
+    }
   return (
+    <>
     <div className='eshopCart'>
         <div className="innerLayer">
             <h1>Cart({cart.length})</h1>
@@ -108,16 +116,24 @@ const EshopCart = () => {
                 <hr />
                 <div className="subtotal">
                     <h2>Subtotal</h2>
-                    <h2>$ {subTotal}</h2>
+                    <h2>$ {subTotal.toLocaleString()}</h2>
                 </div>
                 <p>Delivery fees not included yet.</p>
                 <hr />
                 <div className="butt">
-                <Button>Checkout ({subTotal})</Button>
+                <button onClick={onCheckout} className='btn-primary'>Checkout ({subTotal.toLocaleString()})</button>
                 </div>
             </div>
         </div>
     </div>
+    {
+        PopUpState && 
+        <PopUp>
+            <h2 onClick={()=>setPopUpState(false)} className='closePopup'><span>cancel</span></h2>
+            <h1><span className='login'><Link to="/login">Login</Link></span> or <span className='login'><Link to="/signup">Signup</Link></span> to checkout </h1>
+        </PopUp>
+    }
+    </>
   )
 }
 

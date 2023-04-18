@@ -9,3 +9,4 @@ export {default as MyStore} from "./myStore/MyStore";
 export {default as ProductDisplay} from "./productDisplay/ProductDisplay";
 export {default as SearchResult} from "./searchResult/SearchResult";
 export {default as Withdraw} from "./withdraw/Withdraw";
+export {default as Blog} from "./blog/Blog";
