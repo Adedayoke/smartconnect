@@ -63,6 +63,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/signup" element={<Signup />}/>
+        <Route path="/no-code-signup" element={<NoCodeReg />} />
         <Route path="/blog" element={<Blog />}/>
         <Route path="/store" element={<Eshop />}>
           <Route path="" element={<MyStore />} />
@@ -78,7 +79,6 @@ function App() {
           <Route path="statistics" element={<Statistics data={UserData} />} />
         </Route>
         <Route path="/coupon-merchants" element={<SmartVendors />} />
-        <Route path="/no-code-signup" element={<NoCodeReg />} />
       </Routes>
       <Footer />
     </BrowserRouter>

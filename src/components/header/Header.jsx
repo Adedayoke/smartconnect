@@ -26,12 +26,9 @@ const Header = () => {
       <ul>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/store'>Smart Store</Link></li>
-        <li><Link to='/top-earners'>Top Earners</Link></li>
-        <li><Link to='/adverts'>Advert</Link></li>
         <li><Link to='/coupon-checker'>Coupon Checker</Link></li>
-        <li><Link to='/raffle-winners'>Raffle</Link></li>
         <li><Link to='/coupon-merchants'>Smart Vendors</Link></li>
-        {adminUsers.includes(userEmail) &&  
+        {adminUsers.includes(userEmail) && 
           <li><Link to='/admin/dashboard'>Admin</Link></li>
         }
         {

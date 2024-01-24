@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { DECREASE_QUANTITY, INCREASE_QUANTITY, myCart, REMOVE_FROM_CART } from '../../redux/slice/CartSlice'
+import {SET_PRODUCT_STATE_false} from '../../redux/slice/AllProductsSlice'
 import { FaTrash } from 'react-icons/fa'
 import { db } from '../../firebase/firebase'
 import { selectuserId } from '../../redux/slice/AuthSlice'
@@ -39,7 +40,8 @@ const EshopCart = () => {
             if (filter.id === idd){
                 dispatch(DECREASE_QUANTITY(idd))
                 if(filter.quantity <= 1){
-                    // dispatch(SET_PRODUCT_STATE_false(idd))
+                    dispatch(SET_PRODUCT_STATE_false(idd))
+                    
                    dispatch(REMOVE_FROM_CART(filter))
                 }
             }
@@ -48,7 +50,7 @@ const EshopCart = () => {
     const handleRemove = (idd)=>{
         cart.forEach((product)=>{
             if (product.id === idd){
-                // dispatch(SET_PRODUCT_STATE_false(idd))
+                dispatch(SET_PRODUCT_STATE_false(idd))
                 dispatch(REMOVE_FROM_CART(product))
             }
         })

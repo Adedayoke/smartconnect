@@ -1,36 +1,47 @@
-import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
-import { allProducts } from '../../redux/slice/AllProductsSlice'
-import { useSelector, useDispatch } from 'react-redux'
-import { FaStar } from 'react-icons/fa'
-import { Button } from '../../components'
-import { ADD_TO_CART, myCart, REMOVE_FROM_CART } from '../../redux/slice/CartSlice'
+import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
+import { allProducts, SET_PRODUCT_STATE_false, SET_PRODUCT_STATE_true } from '../../redux/slice/AllProductsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { FaStar } from 'react-icons/fa';
+import { Button } from '../../components';
+import { ADD_TO_CART, myCart, REMOVE_FROM_CART } from '../../redux/slice/CartSlice';
 
 
 const ProductDisplay = () => {
-  const {id} = useParams()
-  const AllProducts = useSelector(allProducts)
-  const CART = useSelector(myCart)
-  const dispatch = useDispatch()
-  const [currentProduct, setCurrentProduct] = useState([])
-  const [state, setState]= useState(false)
+  const {id} = useParams();
+  const AllProducts = useSelector(allProducts);
+  const CART = useSelector(myCart);   
+  const dispatch = useDispatch();
+  const [currentProduct, setCurrentProduct] = useState([]);
+  const [state, setState]= useState(false);
 
 
   useEffect(()=>{
-    const Product = AllProducts.filter((product)=>product.id == id)
-    setCurrentProduct(Product)
+    const Product = AllProducts.filter((product)=>product.id == id);
+    setCurrentProduct(Product);
     // const similarProduct = cartContent.find((product)=>product.id == id)
   }, [AllProducts])
   const handleAddToCart = (idd) =>{
     AllProducts.forEach(product => {
       if (product.id === idd){
+        console.log(product.state)
         if (product.state === false){
-          // dispatch(SET_PRODUCT_STATE_true(idd))
+         dispatch(SET_PRODUCT_STATE_true(idd))
           dispatch(ADD_TO_CART(currentProduct[0]))
           setState(true)
+          console.log(currentProduct)
         }
-        else{
-          // dispatch(SET_PRODUCT_STATE_false(idd))
+      }
+    });
+    
+  }
+  const handleRmvFrmCart = (idd) =>{
+    AllProducts.forEach(product => {
+      if (product.id === idd){
+        console.log(product.state)
+        if (product.state === true){
+          dispatch(SET_PRODUCT_STATE_false(idd))
+          
           dispatch(REMOVE_FROM_CART(currentProduct[0]))
           setState(false)
         }
@@ -83,7 +94,13 @@ const ProductDisplay = () => {
                     </ul>
                   </div>
                   <div className="addButton">
-                    <Button clickEvent={()=> handleAddToCart(product?.id)}>{state ? "REMOVE FROM CART" : "ADD TO CART"}</Button>
+                  {
+                    product?.state ?  
+                      <Button clickEvent={()=> handleRmvFrmCart(product?.id)}>REMOVE FROM CART</Button> : 
+                      <Button clickEvent={()=> handleAddToCart(product?.id)}>ADD TO CART</Button>
+                  }
+                   
+                    
                   </div>
                 </div>
               </div>

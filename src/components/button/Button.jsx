@@ -6,4 +6,4 @@ const Button = ({children, clickEvent, idd}) => {
   )
 }
 
-export default Button
+export default Button;
